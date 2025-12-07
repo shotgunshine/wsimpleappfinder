@@ -152,7 +152,7 @@ void populate_menu(struct appfinder *ctx) {
 		a = a->next;
 	}
 	gtk_editable_set_text(GTK_EDITABLE(ctx->search), "");
-	gtk_entry_grab_focus_without_selecting(GTK_ENTRY(ctx->search));
+	gtk_root_set_focus(GTK_ROOT(ctx->window), ctx->search);
 	gtk_scrolled_window_set_vadjustment(GTK_SCROLLED_WINDOW(ctx->scrolled), NULL);
 }
 
