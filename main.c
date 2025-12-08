@@ -152,7 +152,7 @@ void populate_menu(struct appfinder *ctx) {
 		a = a->next;
 	}
 	gtk_editable_set_text(GTK_EDITABLE(ctx->search), "");
-	gtk_root_set_focus(GTK_ROOT(ctx->window), ctx->search);
+	gtk_widget_grab_focus(ctx->search);
 	gtk_scrolled_window_set_vadjustment(GTK_SCROLLED_WINDOW(ctx->scrolled), NULL);
 }
 
@@ -248,13 +248,13 @@ void activate(GtkApplication *app, gpointer user_data) {
 	} else {
 		gboolean is_active;
 		g_object_get(ctx->window, "is-active", &is_active, NULL);
+		gtk_widget_set_visible(ctx->window, !is_active);
 		if (!is_active) {
 			GtkWidget *child;
 			while ((child = gtk_widget_get_first_child(ctx->menu)) != NULL)
 				gtk_box_remove(GTK_BOX(ctx->menu), child);
 			populate_menu(ctx);
 		}
-		gtk_widget_set_visible(ctx->window, !is_active);
 	}
 }
 
